@@ -2,9 +2,9 @@ package pl.marcinszewczyk.cars.display;
 
 import pl.marcinszewczyk.cars.Car;
 
-public class CarDisplayer {
+public class CarFullDataDisplayer {
 
-    public void displayCarInformation(Car car) {
+    public void displayCarData(Car car) {
         System.out.println("----------" + car.getModelName() + "----------");
         System.out.println("\tSince " + car.getIntroduced());
         System.out.println("\tPower: " + car.getPower());

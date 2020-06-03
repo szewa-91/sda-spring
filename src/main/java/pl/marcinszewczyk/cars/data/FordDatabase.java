@@ -5,7 +5,7 @@ import pl.marcinszewczyk.cars.Car;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FordDatabase implements CarDataProvider {
+public class FordDatabase {
     Map<String, Car> carInformation = new HashMap<>();
 
     public FordDatabase() {
@@ -14,8 +14,8 @@ public class FordDatabase implements CarDataProvider {
         carInformation.put("Mondeo", new Car("Ford Mondeo", "Mid sized passenger sedan with \"One-Ford\" design based on CD4 platform.", 1998, "2 l", 203));
     }
 
-    public Car getCarInformation(String model) {
-        System.out.println("Getting data from production database");
+    public Car getCarData(String model) {
+        System.out.println("Getting data from Ford database");
         return carInformation.get(model);
     }
 }
