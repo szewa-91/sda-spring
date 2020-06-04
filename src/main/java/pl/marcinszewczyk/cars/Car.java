@@ -1,14 +1,19 @@
 package pl.marcinszewczyk.cars;
 
+import pl.marcinszewczyk.CarSegment;
+
 public class Car {
     String modelName;
+    CarSegment carSegment;
     String description;
     int introduced;
     String engine;
     int power;
 
-    public Car(String modelName, String description, int introduced, String engine, int power) {
+
+    public Car(String modelName, CarSegment carSegment, String description, int introduced, String engine, int power) {
         this.modelName = modelName;
+        this.carSegment = carSegment;
         this.description = description;
         this.introduced = introduced;
         this.engine = engine;
@@ -17,6 +22,10 @@ public class Car {
 
     public String getModelName() {
         return modelName;
+    }
+
+    public CarSegment getCarSegment() {
+        return carSegment;
     }
 
     public String getDescription() {
