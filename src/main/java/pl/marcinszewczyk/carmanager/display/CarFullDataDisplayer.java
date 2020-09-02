@@ -1,6 +1,6 @@
-package pl.marcinszewczyk.cars.display;
+package pl.marcinszewczyk.carmanager.display;
 
-import pl.marcinszewczyk.cars.Car;
+import pl.marcinszewczyk.carmanager.Car;
 
 public class CarFullDataDisplayer {
 

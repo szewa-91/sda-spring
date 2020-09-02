@@ -1,4 +1,4 @@
-package pl.marcinszewczyk.cars;
+package pl.marcinszewczyk.carmanager;
 
 import pl.marcinszewczyk.CarSegment;
 
@@ -9,7 +9,6 @@ public class Car {
     int introduced;
     String engine;
     int power;
-
 
     public Car(String modelName, CarSegment carSegment, String description, int introduced, String engine, int power) {
         this.modelName = modelName;
