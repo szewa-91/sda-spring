@@ -5,7 +5,7 @@ import pl.marcinszewczyk.carmanager.Car;
 
 import java.util.*;
 
-public class FordDatabase {
+public class FordDatabase implements CarDatabase {
     List<Car> carInformation = new ArrayList<>();
 
     public FordDatabase() {

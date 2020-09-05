@@ -5,7 +5,7 @@ import pl.marcinszewczyk.carmanager.Car;
 
 import java.util.*;
 
-public class FSODatabase {
+public class FSODatabase implements CarDatabase {
     List<Car> carInformation = new ArrayList<>();
 
     public FSODatabase() {
@@ -15,7 +15,7 @@ public class FSODatabase {
     }
 
     public Collection<Car> getAllCars() {
-        System.out.println("Getting all cars from Ford database");
+        System.out.println("Getting all cars from FSO database");
         return carInformation;
     }
 }
