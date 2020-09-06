@@ -1,10 +1,16 @@
 package pl.marcinszewczyk.carmanager.data;
 
-import pl.marcinszewczyk.CarSegment;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+import pl.marcinszewczyk.carmanager.CarSegment;
 import pl.marcinszewczyk.carmanager.Car;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+@Primary
+@Component
 public class FordDatabase implements CarDatabase {
     List<Car> carInformation = new ArrayList<>();
 

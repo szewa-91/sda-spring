@@ -1,10 +1,12 @@
 package pl.marcinszewczyk.carmanager.data;
 
-import pl.marcinszewczyk.CarSegment;
+import org.springframework.stereotype.Component;
+import pl.marcinszewczyk.carmanager.CarSegment;
 import pl.marcinszewczyk.carmanager.Car;
 
 import java.util.*;
 
+@Component
 public class FSODatabase implements CarDatabase {
     List<Car> carInformation = new ArrayList<>();
 

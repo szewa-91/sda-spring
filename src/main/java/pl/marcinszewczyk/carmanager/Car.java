@@ -1,7 +1,5 @@
 package pl.marcinszewczyk.carmanager;
 
-import pl.marcinszewczyk.CarSegment;
-
 public class Car {
     String modelName;
     CarSegment carSegment;
