@@ -10,8 +10,10 @@ import pl.marcinszewczyk.carmanager.display.CarFullDataDisplayer;
 
 public class CarManagerApplication {
     public static void main(String[] args) {
+        System.out.println("Tworze application context");
         ApplicationContext applicationContext =
                 new AnnotationConfigApplicationContext(CarManagerConfiguration.class);
+        System.out.println("Stworzylem application context");
 
 //        CarService carService = applicationContext.getBean(CarService.class); //przez typ
         CarService carService = applicationContext.getBean("carService", CarService.class);
