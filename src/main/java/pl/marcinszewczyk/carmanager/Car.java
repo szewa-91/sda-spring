@@ -1,6 +1,9 @@
 package pl.marcinszewczyk.carmanager;
 
-public class Car {
+import java.io.Serializable;
+
+public class Car implements Serializable {
+    int id;
     String modelName;
     CarSegment carSegment;
     String description;
@@ -8,13 +11,22 @@ public class Car {
     String engine;
     int power;
 
-    public Car(String modelName, CarSegment carSegment, String description, int introduced, String engine, int power) {
+    public Car() {
+        // needed for deserialization
+    }
+
+    public Car(int id, String modelName, CarSegment carSegment, String description, int introduced, String engine, int power) {
+        this.id = id;
         this.modelName = modelName;
         this.carSegment = carSegment;
         this.description = description;
         this.introduced = introduced;
         this.engine = engine;
         this.power = power;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getModelName() {

@@ -20,4 +20,20 @@ public class CarService {
                 .filter(car -> car.getCarSegment().equals(carSegment))
                 .collect(Collectors.toList());
     }
+
+    public List<Car> getAllCars() {
+        return carDatabase.getAllCars();
+    }
+
+    public Car getCarById(int id) {
+        return carDatabase.getCarById(id);
+    }
+
+    public void addCar(Car car) {
+        carDatabase.addCar(car);
+    }
+
+    public void removeCarById(int id) {
+        carDatabase.removeCarById(id);
+    }
 }
