@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.marcinszewczyk.carmanager.data.CarDatabase;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.NoSuchElementException;
 
 @Component
 public class CarService {
@@ -16,24 +16,23 @@ public class CarService {
     }
 
     public List<Car> getCarsForSegment(CarSegment carSegment) {
-        return carDatabase.getAllCars().stream()
-                .filter(car -> car.getCarSegment().equals(carSegment))
-                .collect(Collectors.toList());
+        return carDatabase.findBySegment(carSegment);
     }
 
     public List<Car> getAllCars() {
-        return carDatabase.getAllCars();
+        return carDatabase.findAll();
     }
 
     public Car getCarById(int id) {
-        return carDatabase.getCarById(id);
+        return carDatabase.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
     public void addCar(Car car) {
-        carDatabase.addCar(car);
+        carDatabase.save(car);
     }
 
     public void removeCarById(int id) {
-        carDatabase.removeCarById(id);
+        Car carToDelete = carDatabase.findById(id).orElseThrow(NoSuchElementException::new);
+        carDatabase.delete(carToDelete);
     }
 }

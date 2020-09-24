@@ -10,12 +10,13 @@ public class Car implements Serializable {
     int introduced;
     String engine;
     int power;
+    boolean available;
 
     public Car() {
         // needed for deserialization
     }
 
-    public Car(int id, String modelName, CarSegment carSegment, String description, int introduced, String engine, int power) {
+    public Car(int id, String modelName, CarSegment carSegment, String description, int introduced, String engine, int power, boolean available) {
         this.id = id;
         this.modelName = modelName;
         this.carSegment = carSegment;
@@ -23,6 +24,7 @@ public class Car implements Serializable {
         this.introduced = introduced;
         this.engine = engine;
         this.power = power;
+        this.available = available;
     }
 
     public int getId() {
@@ -51,5 +53,9 @@ public class Car implements Serializable {
 
     public int getPower() {
         return power;
+    }
+
+    public boolean isAvailable() {
+        return available;
     }
 }
