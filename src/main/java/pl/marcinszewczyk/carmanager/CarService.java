@@ -3,6 +3,7 @@ package pl.marcinszewczyk.carmanager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import pl.marcinszewczyk.carmanager.data.CarDatabase;
+import pl.marcinszewczyk.carmanager.data.JpaCarRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,38 +18,40 @@ public class CarService {
     @Value("${carmanager.welcomemessage}")
     String welcomeMessage;
 
-    private final CarDatabase carDatabase;
+    private final JpaCarRepository jpaCarRepository;
 
-    public CarService(CarDatabase carDatabase) {
-        this.carDatabase = carDatabase;
+    public CarService( JpaCarRepository jpaCarRepository) {
+        this.jpaCarRepository = jpaCarRepository;
     }
 
     public List<Car> getCarsForSegment(CarSegment carSegment) {
-        return carDatabase.findBySegment(carSegment);
+        return jpaCarRepository.findByCarSegment(carSegment);
     }
 
     public List<Car> getAllCars() {
         System.out.println(welcomeMessage);
 
+        List<Car> allCars = jpaCarRepository.findAll();
+
         if (showOnlyAvailable) {
-            return carDatabase.findAll().stream()
+            return allCars.stream()
                     .filter(car -> car.isAvailable())
                     .collect(Collectors.toList());
         } else {
-            return carDatabase.findAll();
+            return allCars;
         }
     }
 
     public Car getCarById(int id) {
-        return carDatabase.findById(id).orElseThrow(NoSuchElementException::new);
+        return jpaCarRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
     public void addCar(Car car) {
-        carDatabase.save(car);
+        jpaCarRepository.save(car);
     }
 
     public void removeCarById(int id) {
-        Car carToDelete = carDatabase.findById(id).orElseThrow(NoSuchElementException::new);
-        carDatabase.delete(carToDelete);
+        Car carToDelete = jpaCarRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        jpaCarRepository.delete(carToDelete);
     }
 }
