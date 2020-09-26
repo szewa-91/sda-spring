@@ -1,13 +1,21 @@
 package pl.marcinszewczyk.carmanager;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import pl.marcinszewczyk.carmanager.data.CarDatabase;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Component
 public class CarService {
+
+    @Value("${carmanager.showonlyavailable}")
+    private boolean showOnlyAvailable;
+
+    @Value("${carmanager.welcomemessage}")
+    String welcomeMessage;
 
     private final CarDatabase carDatabase;
 
@@ -20,7 +28,15 @@ public class CarService {
     }
 
     public List<Car> getAllCars() {
-        return carDatabase.findAll();
+        System.out.println(welcomeMessage);
+
+        if (showOnlyAvailable) {
+            return carDatabase.findAll().stream()
+                    .filter(car -> car.isAvailable())
+                    .collect(Collectors.toList());
+        } else {
+            return carDatabase.findAll();
+        }
     }
 
     public Car getCarById(int id) {
