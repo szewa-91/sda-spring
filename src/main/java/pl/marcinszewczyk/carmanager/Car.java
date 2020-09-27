@@ -1,7 +1,5 @@
 package pl.marcinszewczyk.carmanager;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,8 +10,9 @@ import java.util.List;
 public class Car implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_seq")
-    private int id;
+    private Integer id;
     private String modelName;
+    @Enumerated(EnumType.STRING)
     private CarSegment carSegment;
     private String description;
     private int introduced;
@@ -21,11 +20,11 @@ public class Car implements Serializable {
     private int power;
     private boolean available;
 
-    @OneToMany(cascade = {CascadeType.PERSIST})
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "CAR_ID")
     private List<Version> versions = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinTable(
             name = "CAR_TO_CAR_ADJUSTMENTS",
             joinColumns = @JoinColumn(name = "CAR_ID"),
