@@ -10,7 +10,7 @@ import java.util.List;
 public class Car implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_seq")
-    private Integer id;
+    private int id;
     private String modelName;
     @Enumerated(EnumType.STRING)
     private CarSegment carSegment;
