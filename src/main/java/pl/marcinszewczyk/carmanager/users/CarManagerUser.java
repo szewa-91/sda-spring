@@ -3,19 +3,33 @@ package pl.marcinszewczyk.carmanager.users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.Collection;
 
+@Entity
+@Table(name = "USER")
 public class CarManagerUser implements UserDetails {
 
+    @Id
     private String username;
     private String password;
-    private Collection<GrantedAuthority> authorities;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "USER_AUTHORITY",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID")
+    )
+    private Collection<CarManagerAuthority> authorities;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
 
-    public CarManagerUser(String username, String password, Collection<GrantedAuthority> authorities, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled) {
+    public CarManagerUser() {
+    }
+
+    public CarManagerUser(String username, String password, Collection<CarManagerAuthority> authorities, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;

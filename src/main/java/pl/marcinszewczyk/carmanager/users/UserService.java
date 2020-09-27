@@ -12,21 +12,14 @@ import java.util.List;
 
 @Component
 public class UserService implements UserDetailsService {
-    private List<CarManagerUser> users = new ArrayList<>();
+    private UserRepository userRepository;
 
-    public UserService() {
-        users.add(
-                new CarManagerUser("user1", "{noop}password",
-                        Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")),
-                        true, true, true, true
-                )
-        );
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return users.stream()
-                .filter(user -> user.getUsername().equals(username))
-                .findAny().orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
+        return userRepository.findByUsername(username);
     }
 }

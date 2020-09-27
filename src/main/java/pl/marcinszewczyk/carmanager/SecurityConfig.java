@@ -13,14 +13,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
-                .and()
+            .and()
+                .headers()
+                .frameOptions()
+                .sameOrigin()
+
+            .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/cars/segment/*").hasRole("MOD")
+                .antMatchers( "/h2-console/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/**").hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/cars/segment/*").hasRole("MOD")
                 .antMatchers(HttpMethod.POST, "/**").hasRole("SHOGUN")
                 .antMatchers(HttpMethod.DELETE, "/**").hasRole("SHOGUN")
             .and()
-            .formLogin();
+                .formLogin();
 
         http.csrf().disable();
     }
